@@ -1,12 +1,11 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/iamdonovan/egm722/main)
-
-# EGM722: Programming for GIS and Remote Sensing Exercises
+# EGM722: Project
 
 ## 1. Getting started
 
-To get started with the exercises, you'll need to install both `git` and `conda` on your computer. You can follow the
-instructions provided on Blackboard, or from the instructions for installing git from [here](https://git-scm.com/downloads), 
-and Anaconda from [here](https://docs.anaconda.com/anaconda/install/). 
+To run the script, you will need to install `git`, `conda` and a python interpreter such as `PyCharm` on your computer. 
+Instructions for installing git can be found [here](https://git-scm.com/downloads), instructions for Anaconda can be
+found [here](https://docs.anaconda.com/anaconda/install/) and instructions for PyCharm Community Edition 
+can be found [here](https://www.jetbrains.com/pycharm/download/#section=windows).
 
 ## 2. Download/clone this repository
 
@@ -15,11 +14,10 @@ Once you have these installed, __clone__ this repository to your computer by doi
 1. Open GitHub Desktop and select __File__ > __Clone Repository__. Select the __URL__ tab, then enter the URL for this 
    repository.
 2. Open __Git Bash__ (from the __Start__ menu), then navigate to your folder for this module.
-   Now, execute the following command: `git clone https://github.com/iamdonovan/egm722.git`. You should see some messages
+   Now, execute the following command: `git clone https://github.com/timm409/project`. You should see some messages
    about downloading/unpacking files, and the repository should be set up.
 3. You can also clone this repository by clicking the green "clone or download" button above, and select "download ZIP"
-   at the bottom of the menu. Once it's downloaded, unzip the file and move on to the next step. I don't recommend this
-   step, however, as it will be more difficult for you to download the material for each week. 
+   at the bottom of the menu. Once it's downloaded, unzip the file and move on to the next step.
 
 ## 3. Create a conda environment
 
@@ -32,31 +30,9 @@ Otherwise, you can open a command prompt (on Windows, you may need to select an 
 to the folder where you cloned this repository and run the following command:
 
 ```
-C:\Users\iamdonovan> conda env create -f environment.yml
+C:\Users\> conda env create -f environment.yml
 ```
 
-This will probably take some time (so feel free to catch up on Facebook or whatever kids do nowadays), but fortunately 
-you will only have to do this once. If you
+## 4. Start PyCharm
 
-## 4. Start jupyter-notebook
-
-From Anaconda Navigator, you can launch jupyter-notebook directly, and navigate to the folder where the first week's
-practical material is located. Make sure that your egm722 environment is activated.
-
-From the command-line, first open a terminal window or an __Anaconda Prompt__, and navigate to the folder where the
-first week's practical material is located.
-
-Activate your newly-created environment (`conda activate egm722`). Launch jupyter-notebook (`jupyter-notebook.exe`),
-which should launch a web browser window, which should give you an overview of the current folder. 
-
-## 5. Next steps
-The material for this module is organized as follows:
-
-Week 1. Introduction to git and programming with python
-Week 2. More introduction to python
-Week 3. Working with vector data in python
-Week 4. Working with raster data in python
-Week 5. Additional exercises
-
-You are free to work through the material at your own pace. If you are enrolled in EGM722 at Ulster University, you
-will find additional resources via the module webpage on Blackboard.
+Launch PyCharm and open the python script by navigating to the project folder.
