@@ -13,7 +13,7 @@ Once you have these installed, __clone__ this repository to your computer by doi
 
 1. Open GitHub Desktop and select __File__ > __Clone Repository__. Select the __URL__ tab, then enter the URL for this 
    repository.
-2. Open __Git Bash__ (from the __Start__ menu), then navigate to your folder for this module.
+2. Open __Git Bash__ (from the __Start__ menu), then navigate to the project folder.
    Now, execute the following command: `git clone https://github.com/timm409/project`. You should see some messages
    about downloading/unpacking files, and the repository should be set up.
 3. You can also clone this repository by clicking the green "clone or download" button above, and select "download ZIP"
@@ -30,7 +30,7 @@ Otherwise, you can open a command prompt (on Windows, you may need to select an 
 to the folder where you cloned this repository and run the following command:
 
 ```
-C:\Users\> conda env create -f environment.yml
+C:\Users\timm409> conda env create -f environment.yml
 ```
 
 ## 4. Start PyCharm
