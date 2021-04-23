@@ -1,11 +1,15 @@
 import gdal
 
-dem = gdal.Open("C:/Users/Raph Martin/Documents/project/data_files/dem_200m.tif")
-slope1 = "C:/Users/Raph Martin/Documents/project/data_files/slope1.tif"
-aspect1 = "C:/Users/Raph Martin/Documents/project/data_files/aspect1.tif"
+dem_clip = "data_files/raster/dem_clip.tif"
+slope = "data_files/raster/slope1.tif"
+aspect = "data_files/raster/aspect1.tif"
 
-slp = gdal.DEMProcessing(slope1, dem, "slope", computeEdges=True)
 
-asp = gdal.DEMProcessing(aspect1, dem, "aspect", computeEdges=True)
+def create_slp_asp(dem, slp_out, asp_out):
+    gdal.Open(dem)
+    gdal.DEMProcessing(slp_out, dem, "slope", computeEdges=True)
+    gdal.DEMProcessing(asp_out, dem, "aspect", computeEdges=True)
+    dem = None
 
-slope1 = aspect1 = dem = None
+
+create_slp_asp(dem_clip, slope, aspect)

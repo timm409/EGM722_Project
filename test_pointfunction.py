@@ -15,4 +15,4 @@ def c_point(coordinates, location, epsg, output):
     newdata.to_file(outfp)
 
 
-c_point((312130.15, 585253.25), 'Stevens Croft', 27700, "data_files/power_station_function2")
+c_point((312130.15, 585253.25), 'Stevens Croft', 27700, "data_files/pwr_stn.shp")
