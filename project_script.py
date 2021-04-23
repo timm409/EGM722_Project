@@ -54,7 +54,7 @@ def multi2single(gpdf):
 
     for i, row in gpdf_multipoly.iterrows():
         series_geometries = pd.Series(row.geometry)
-        df = pd.concat([gp.GeoDataFrame(row, crs=gpdf_multipoly.crs).T]*len(series_geometries), ignore_index=True)
+        df = pd.concat([gpd.GeoDataFrame(row, crs=gpdf_multipoly.crs).T]*len(series_geometries), ignore_index=True)
         df['geometry'] = series_geometries
         gpdf_singlepoly = pd.concat([gpdf_singlepoly, df])
 
@@ -120,7 +120,7 @@ inf_buf = inf_merge.buffer(25)
 inf_buf.to_file('data_files/vector/inf_buf.shp', driver='ESRI Shapefile')
 
 # Read multipart polygon output
-gsa_other = gp.read_file("data_files/vector/gsa_other.shp")
+gsa_other = gpd.read_file("data_files/vector/gsa_other.shp")
 
 # Explode the shapefile from multipart to singlepart and write to file
 multi2single(gsa_other).to_file('data_files/vector/gsa_explode.shp', driver='ESRI Shapefile')
