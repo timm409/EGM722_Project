@@ -9,6 +9,12 @@ import numpy as np
 from osgeo import osr
 from shapely.geometry import Point, shape, mapping
 from fiona.crs import from_epsg
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from cartopy.feature import ShapelyFeature
+import cartopy.crs as ccrs
+import matplotlib.patches as mpatches
+
 
 """
 This code is for finding suitable land for biomass planting
@@ -210,6 +216,33 @@ def c_point(coordinates, location, epsg, output):
     return newdata.to_file(output)
 
 
+# generate matplotlib handles to create a legend of the features we put in our map.
+def generate_handles(labels, colors, edge='k', alpha=1):
+    lc = len(colors)  # get the length of the color list
+    handles = []
+    for i in range(len(labels)):
+        handles.append(mpatches.Circle((0.5, 0.5), 0.25, facecolor=colors[i % lc], edgecolor=edge, alpha=alpha))
+    return handles
+
+
+def scale_bar(ax, location=(0.92, 0.9)):
+    llx0, llx1, lly0, lly1 = ax.get_extent(ccrs.PlateCarree())
+    sbllx = (llx1 + llx0) / 2
+    sblly = lly0 + (lly1 - lly0) * location[1]
+
+    tmc = ccrs.TransverseMercator(sbllx, sblly)
+    x0, x1, y0, y1 = ax.get_extent(tmc)
+    sbx = x0 + (x1 - x0) * location[0]
+    sby = y0 + (y1 - y0) * location[1]
+
+    plt.plot([sbx, sbx - 10000], [sby, sby], color='k', linewidth=6, transform=tmc)
+    plt.plot([sbx, sbx - 5000], [sby, sby], color='k', linewidth=3, transform=tmc)
+    plt.plot([sbx-5000, sbx - 10000], [sby, sby], color='w', linewidth=3, transform=tmc)
+
+    plt.text(sbx, sby-2000, '10 km', transform=tmc, fontsize=8)
+    plt.text(sbx-5000, sby-2000, '5 km', transform=tmc, fontsize=8)
+    plt.text(sbx-10500, sby-2000, '0 km', transform=tmc, fontsize=8)
+
 """
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -361,9 +394,61 @@ print("The total suitable area found is {}km2".format(round(final_selection['are
 
 """
 
-
 # Create point for Stevens Croft power station and write to file
-pwr_stn = c_point((312130.15, 585253.25), 'Stevens Croft', 27700, "data_files/vector/pwr_stn.shp")
+c_point((312130.15, 585253.25), 'Stevens Croft', 27700, "data_files/vector/pwr_stn.shp")
+pwr_station_point = gpd.read_file('data_files/vector/pwr_stn.shp')
 
-# Create a point for Dumfries
-dumfries = c_point((297182.05, 576278.94), 'Dumfries', 27700, "data_files/vector/dumfries.shp")
+# Read the travel time and suitable area shapefiles
+study_area = gpd.read_file('data_files/vector/travel_time.shp')
+suitable_areas = gpd.read_file('data_files/vector/final_selection.shp')
+
+# Convert shapefiles to WGS84/ UTM zone 30N
+pwr_station = pwr_station_point.to_crs(epsg=32630)
+s_areas = suitable_areas.to_crs(epsg=32630)
+study_tm = study_area.to_crs(epsg=32630)
+
+# Set the map crs to UTM zone
+mycrs = ccrs.UTM(30)
+
+# Create figure for the map
+fig, ax = plt.subplots(1, 1, figsize=(8, 8), subplot_kw=dict(projection=mycrs))
+
+# Plot the polygon data
+study_plot = ShapelyFeature(study_tm['geometry'], mycrs, facecolor='w', edgecolor='k', linewidth=0.75)
+area_plot = ShapelyFeature(s_areas['geometry'], mycrs, facecolor='g')
+
+# Add study area, suitable land areas and power station to the map
+ax.add_feature(study_plot)
+ax.add_feature(area_plot)
+ax.plot(pwr_station.geometry.x, pwr_station.geometry.y, 'o', color='r', ms=8, label='Stevens Croft', transform=mycrs)
+
+# Set extent of the map to the extent of the travel time/study area
+xmin, ymin, xmax, ymax = study_tm.total_bounds
+ax.set_extent([xmin, xmax, ymin, ymax], crs=mycrs)
+
+# Colours and labels for legend
+colours = ['g', 'r', 'k']
+text = ["Suitable Land", "Power Station"]
+
+# Generate handle for legend
+area_handle = generate_handles('Suitable Land', ['g'])
+
+# Create legend
+ax.legend(area_handle, ['Suitable Land'], fontsize=10, loc='upper right', frameon=True, framealpha=1)
+
+# Add a scale bar
+scale_bar(ax)
+
+# Add a north arrow
+x, y, arrow_length = 0.05, 0.98, 0.1
+ax.annotate('N', xy=(x, y), xytext=(x, y-arrow_length),
+            arrowprops=dict(facecolor='black', width=2, headwidth=10),
+            ha='center', va='center', fontsize=18,
+            xycoords=ax.transAxes)
+
+# Add a label for the power station
+ax.text(pwr_station.geometry.x, pwr_station.geometry.y-1750, 'Power Station', backgroundcolor='w',
+        ha='center', c='r', fontsize=6)
+
+# Save the figure
+fig.savefig('final_map.jpg', dpi=500, bbox_inches='tight')
