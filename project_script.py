@@ -210,9 +210,9 @@ def c_point(coordinates, location, epsg, output):
     return newdata.to_file(output)
 
 
-travel_time = "data_files/vector/travel_time.shp"
-
 """
+
+#-----------------------------------------------------------------------------------------------------------------------
 
 # Define DEM, travel area shapefile and output for clipped DEM
 dem = "data_files/raster/dem_25m.tif"
@@ -253,18 +253,17 @@ z[z < 0] = np.nan
 z[z < 45] = 1
 writeraster(aspect_reclass_ne, geotransform, geoproj, z)
 
-# Convert reclassed slope and aspect to polygon shapefiles
-
-
+# Define the output path for the new shapefiles
 aspect_vec_nw = "data_files/vector/aspect_vec_nw"
 slope_vec = "data_files/vector/slope_vec"
 aspect_vec_ne = "data_files/vector/aspect_vec_ne"
 
+# Convert the rasters to shapefiles
 polygon_raster(aspect_reclass_nw, aspect_vec_nw)
 polygon_raster(aspect_reclass_ne, aspect_vec_ne)
 polygon_raster(slope_reclass, slope_vec)
 
-# Open the shapefiles from dem
+# Open the converted shapefiles 
 aspect_vec_nw = gpd.read_file('data_files/vector/aspect_vec_nw.shp')
 aspect_vec_ne = gpd.read_file('data_files/vector/aspect_vec_ne.shp')
 slope_vec = gpd.read_file('data_files/vector/slope_vec.shp')
@@ -275,10 +274,10 @@ steep_north_merged = merge_shp(steep_north)
 steep_north_dissolved = "data_files/vector/steep_north_dissolved.shp"
 unite_shp(steep_north_merged, "EPSG:27700", steep_north_dissolved)
 
-"""
-steep_north_dissolved = "data_files/vector/steep_north_dissolved.shp"
+# Output path of erase
 poly_clip1 = 'data_files/vector/poly_clip1.shp'
 
+# Erase steep and north facing areas
 erase_shp(travel_time, steep_north_dissolved, poly_clip1, "EPSG:27700")
 
 # Open the shapefiles for infrastructure
@@ -295,14 +294,14 @@ inf_merge = merge_shp(infra)
 # 25m buffer of infrastructure
 inf_buf = inf_merge.geometry.buffer(24)
 
-# Dissolve infrastructure buffer
+# Dissolve infrastructure buffer and save to file
 inf_buf_dissolved = unite_shp(inf_buf, inf_buf.crs)
-
 inf_buf_dissolved.to_file('data_files/vector/inf_buf_dissolved.shp')
 
 # Outputs for infrastructure erase function
 poly_clip2 = 'data_files/vector/poly_clip2.shp'
 
+# Path of dissolved infrastructure buffer
 inf_buf_dissolved = 'data_files/vector/inf_buf_dissolved.shp'
 
 # Erase the infrastructure from the polygon
@@ -318,13 +317,14 @@ p_areas = [ramsar, sssi]
 # Merge the protected areas shapefiles and define
 p_areas_merge = merge_shp(p_areas)
 
-# Dissolve protected areas
+# Dissolve protected areas and save to file
 p_areas_dissolved = unite_shp(p_areas_merge, p_areas_merge.crs)
-
 p_areas_dissolved.to_file('data_files/vector/p_areas_dissolved.shp')
 
+# Output after erasing protected areas 
 poly_clip3 = 'data_files/vector/poly_clip3.shp'
 
+# Path of dissolved protected areas 
 p_areas_dissolved = 'data_files/vector/p_areas_dissolved.shp'
 
 # Erase the protected areas from the polygon
@@ -353,9 +353,14 @@ final_areas[final_areas['area_km2'] > 1].to_file('data_files/vector/final_select
 
 # Read the final areas file
 final_selection = gpd.read_file('data_files/vector/final_selection.shp')
-
+ 
 # Print result of analysis
 print("The total suitable area found is {}km2".format(round(final_selection['area_km2'].sum(), 2)))
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+"""
+
 
 # Create point for Stevens Croft power station and write to file
 pwr_stn = c_point((312130.15, 585253.25), 'Stevens Croft', 27700, "data_files/vector/pwr_stn.shp")
