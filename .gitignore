@@ -7,17 +7,12 @@ bin-release/
 # Other files and folders
 .settings/
 .ipynb_checkpoints/
-.data_files/
 
 # Executables
 *.swf
 *.air
 *.ipa
 *.apk
-
-# Large tif files
-*.tiff
-*.tif
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
