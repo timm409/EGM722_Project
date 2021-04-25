@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MD_Metadata xmlns="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<fileIdentifier>
+		<gco:CharacterString>ECA527A8-DC9A-49F3-8911-F4CF9C3019A5</gco:CharacterString>
+	</fileIdentifier>
+	<language>
+		<LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="eng" codeSpace="ISO639-2">eng</LanguageCode>
+	</language>
+	<characterSet>
+		<MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+	</characterSet>
+	<hierarchyLevel>
+		<MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset" codeSpace="ISOTC211/19115">dataset</MD_ScopeCode>
+	</hierarchyLevel>
+	<hierarchyLevelName>
+		<gco:CharacterString>dataset</gco:CharacterString>
+	</hierarchyLevelName>
+	<contact>
+		<CI_ResponsibleParty>
+			<individualName>
+				<gco:CharacterString>Gabor Barton</gco:CharacterString>
+			</individualName>
+			<organisationName>
+				<gco:CharacterString>Scottish Natural Heritage</gco:CharacterString>
+			</organisationName>
+			<positionName>
+				<gco:CharacterString>Geographic Systems &amp; Data Officer</gco:CharacterString>
+			</positionName>
+			<contactInfo>
+				<CI_Contact>
+					<phone>
+						<CI_Telephone>
+							<voice>
+								<gco:CharacterString>01463 725000</gco:CharacterString>
+							</voice>
+						</CI_Telephone>
+					</phone>
+					<address>
+						<CI_Address>
+							<deliveryPoint>
+								<gco:CharacterString>Great Glen House, Leachkin Road</gco:CharacterString>
+							</deliveryPoint>
+							<city>
+								<gco:CharacterString>INVERNESS</gco:CharacterString>
+							</city>
+							<postalCode>
+								<gco:CharacterString>IV3 8NW</gco:CharacterString>
+							</postalCode>
+							<country>
+								<gco:CharacterString>GB</gco:CharacterString>
+							</country>
+							<electronicMailAddress>
+								<gco:CharacterString>data.supply@snh.gov.uk</gco:CharacterString>
+							</electronicMailAddress>
+						</CI_Address>
+					</address>
+				</CI_Contact>
+			</contactInfo>
+			<role>
+				<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="distributor" codeSpace="ISOTC211/19115">distributor</CI_RoleCode>
+			</role>
+		</CI_ResponsibleParty>
+	</contact>
+	<dateStamp>
+		<gco:Date>2017-09-19</gco:Date>
+	</dateStamp>
+	<metadataStandardName>
+		<gco:CharacterString>ISO 19139 Geographic Information - Metadata - Implementation Specification</gco:CharacterString>
+	</metadataStandardName>
+	<metadataStandardVersion>
+		<gco:CharacterString>2007</gco:CharacterString>
+	</metadataStandardVersion>
+	<spatialRepresentationInfo>
+		<MD_VectorSpatialRepresentation>
+			<topologyLevel>
+				<MD_TopologyLevelCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopologyLevelCode" codeListValue="geometryOnly" codeSpace="ISOTC211/19115">geometryOnly</MD_TopologyLevelCode>
+			</topologyLevel>
+			<geometricObjects>
+				<MD_GeometricObjects>
+					<geometricObjectType>
+						<MD_GeometricObjectTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_GeometricObjectTypeCode" codeListValue="composite" codeSpace="ISOTC211/19115">composite</MD_GeometricObjectTypeCode>
+					</geometricObjectType>
+					<geometricObjectCount>
+						<gco:Integer>15872</gco:Integer>
+					</geometricObjectCount>
+				</MD_GeometricObjects>
+			</geometricObjects>
+		</MD_VectorSpatialRepresentation>
+	</spatialRepresentationInfo>
+	<referenceSystemInfo>
+		<MD_ReferenceSystem>
+			<referenceSystemIdentifier>
+				<RS_Identifier>
+					<code>
+						<gco:CharacterString>urn:ogc:def:crs:EPSG::27700</gco:CharacterString>
+					</code>
+					<codeSpace>
+						<gco:CharacterString>EPSG</gco:CharacterString>
+					</codeSpace>
+					<version>
+						<gco:CharacterString>7.4.1</gco:CharacterString>
+					</version>
+				</RS_Identifier>
+			</referenceSystemIdentifier>
+		</MD_ReferenceSystem>
+	</referenceSystemInfo>
+	<identificationInfo>
+		<MD_DataIdentification>
+			<citation>
+				<CI_Citation>
+					<title>
+						<gco:CharacterString>Sites of Special Scientific Interest</gco:CharacterString>
+					</title>
+					<date>
+						<CI_Date>
+							<date>
+								<gco:Date>1997-01-01</gco:Date>
+							</date>
+							<dateType>
+								<CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation" codeSpace="ISOTC211/19115">creation</CI_DateTypeCode>
+							</dateType>
+						</CI_Date>
+					</date>
+					<date>
+						<CI_Date>
+							<date>
+								<gco:Date>2017-09-19</gco:Date>
+							</date>
+							<dateType>
+								<CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" codeSpace="ISOTC211/19115">revision</CI_DateTypeCode>
+							</dateType>
+						</CI_Date>
+					</date>
+					<identifier>
+						<MD_Identifier>
+							<code>
+								<gco:CharacterString>SSSI</gco:CharacterString>
+							</code>
+						</MD_Identifier>
+					</identifier>
+					<presentationForm>
+						<CI_PresentationFormCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_PresentationFormCode" codeListValue="mapDigital" codeSpace="ISOTC211/19115">mapDigital</CI_PresentationFormCode>
+					</presentationForm>
+				</CI_Citation>
+			</citation>
+			<abstract>
+				<gco:CharacterString>Sites of Special Scientific Interest (SSSI) are those areas of land and water (to the seaward limits of local authority areas or MLWS) that Scottish Natural Heritage (SNH) considers to best represent our natural heritage - its diversity of plants, animals and habitats, rocks and landforms, or a combinations of such natural features. They are the essential building blocks of Scotland's protected areas for nature conservation. Many are also designated as Natura sites (Special Protection Areas or Special Areas of Conservation)..The national network of SSSIs in Scotland forms part of the wider GB series. SNH designates SSSIs under the Nature Conservation (Scotland) Act 2004. SSSIs are protected by law. It is an offence for any person to intentionally or recklessly damage the protected natural features of an SSSI. SSSIs were first designated under the National Parks and Access to the Countryside Act 1949. The majority of these were later re-notified under the Wildlife and Countryside Act 1981. All 1981 Act SSSI designations are carried forward, and all new SSSI designations are now made, under the Nature Conservation (Scotland) Act 2004.</gco:CharacterString>
+			</abstract>
+			<credit>
+				<gco:CharacterString>©Scottish Natural Heritage. Contains Ordnance Survey data © Crown copyright and database right (year)</gco:CharacterString>
+			</credit>
+			<pointOfContact>
+				<CI_ResponsibleParty>
+					<individualName>
+						<gco:CharacterString>Gabor Barton</gco:CharacterString>
+					</individualName>
+					<organisationName>
+						<gco:CharacterString>Scottish Natural Heritage</gco:CharacterString>
+					</organisationName>
+					<positionName>
+						<gco:CharacterString>Geographic Systems &amp; Data Officer</gco:CharacterString>
+					</positionName>
+					<contactInfo>
+						<CI_Contact>
+							<phone>
+								<CI_Telephone>
+									<voice>
+										<gco:CharacterString>01463 725000</gco:CharacterString>
+									</voice>
+								</CI_Telephone>
+							</phone>
+							<address>
+								<CI_Address>
+									<deliveryPoint>
+										<gco:CharacterString>Great Glen House, Leachkin Road</gco:CharacterString>
+									</deliveryPoint>
+									<city>
+										<gco:CharacterString>INVERNESS</gco:CharacterString>
+									</city>
+									<postalCode>
+										<gco:CharacterString>IV3 8NW</gco:CharacterString>
+									</postalCode>
+									<country>
+										<gco:CharacterString>GB</gco:CharacterString>
+									</country>
+									<electronicMailAddress>
+										<gco:CharacterString>data.supply@snh.gov.uk</gco:CharacterString>
+									</electronicMailAddress>
+								</CI_Address>
+							</address>
+						</CI_Contact>
+					</contactInfo>
+					<role>
+						<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="distributor" codeSpace="ISOTC211/19115">distributor</CI_RoleCode>
+					</role>
+				</CI_ResponsibleParty>
+			</pointOfContact>
+			<pointOfContact>
+				<CI_ResponsibleParty>
+					<individualName>
+						<gco:CharacterString>Lachlan Renwick</gco:CharacterString>
+					</individualName>
+					<organisationName>
+						<gco:CharacterString>Scottish Natural Heritage</gco:CharacterString>
+					</organisationName>
+					<contactInfo>
+						<CI_Contact>
+							<phone>
+								<CI_Telephone>
+									<voice>
+										<gco:CharacterString>01738 458669 </gco:CharacterString>
+									</voice>
+								</CI_Telephone>
+							</phone>
+							<address>
+								<CI_Address>
+									<deliveryPoint>
+										<gco:CharacterString>Battleby, Redgorton</gco:CharacterString>
+									</deliveryPoint>
+									<city>
+										<gco:CharacterString>Perth</gco:CharacterString>
+									</city>
+									<postalCode>
+										<gco:CharacterString>PH1 3EW</gco:CharacterString>
+									</postalCode>
+									<country>
+										<gco:CharacterString>GB</gco:CharacterString>
+									</country>
+									<electronicMailAddress>
+										<gco:CharacterString>lachlan.renwick@snh.gov.uk</gco:CharacterString>
+									</electronicMailAddress>
+								</CI_Address>
+							</address>
+						</CI_Contact>
+					</contactInfo>
+					<role>
+						<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" codeSpace="ISOTC211/19115">custodian</CI_RoleCode>
+					</role>
+				</CI_ResponsibleParty>
+			</pointOfContact>
+			<resourceMaintenance>
+				<MD_MaintenanceInformation>
+					<maintenanceAndUpdateFrequency>
+						<MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="continual" codeSpace="ISOTC211/19115">continual</MD_MaintenanceFrequencyCode>
+					</maintenanceAndUpdateFrequency>
+				</MD_MaintenanceInformation>
+			</resourceMaintenance>
+			<resourceFormat>
+				<MD_Format>
+					<name>
+						<gco:CharacterString>SDE Feature Class</gco:CharacterString>
+					</name>
+					<version gco:nilReason="missing"/>
+				</MD_Format>
+			</resourceFormat>
+			<descriptiveKeywords>
+				<MD_Keywords>
+					<keyword>
+						<gco:CharacterString>GB-SCT</gco:CharacterString>
+					</keyword>
+					<type>
+						<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+					</type>
+				</MD_Keywords>
+			</descriptiveKeywords>
+			<descriptiveKeywords>
+				<MD_Keywords>
+					<keyword>
+						<gco:CharacterString>Nature conservation</gco:CharacterString>
+					</keyword>
+					<thesaurusName>
+						<CI_Citation>
+							<title>
+								<gco:CharacterString>Government Category List</gco:CharacterString>
+							</title>
+							<date>
+								<CI_Date>
+									<date>
+										<gco:Date>2006-05-25</gco:Date>
+									</date>
+									<dateType>
+										<CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" codeSpace="ISOTC211/19115">publication</CI_DateTypeCode>
+									</dateType>
+								</CI_Date>
+							</date>
+						</CI_Citation>
+					</thesaurusName>
+				</MD_Keywords>
+			</descriptiveKeywords>
+			<descriptiveKeywords>
+				<MD_Keywords>
+					<keyword>
+						<gco:CharacterString>Downloadable Data</gco:CharacterString>
+					</keyword>
+					<thesaurusName uuidref="723f6998-058e-11dc-8314-0800200c9a66"/>
+				</MD_Keywords>
+			</descriptiveKeywords>
+			<resourceConstraints>
+				<MD_Constraints>
+					<useLimitation>
+						<gco:CharacterString>Available under the Open Government Licence (http://www.nationalarchives.gov.uk/doc/open-government-licence/), Note that this data is available to view or download on SNH website see: www.snh.gov.uk/publications-data-and-research/snhi-information-service</gco:CharacterString>
+					</useLimitation>
+				</MD_Constraints>
+			</resourceConstraints>
+			<resourceConstraints>
+				<MD_LegalConstraints>
+					<useLimitation>
+						<gco:CharacterString>You must always use the following attribution statement to acknowledge the source of the information: (Copyright Scottish Natural Heritage) Contains Ordnance Survey data © Crown copyright and database right (year)</gco:CharacterString>
+					</useLimitation>
+					<otherConstraints>
+						<gco:CharacterString>Available under the Open Government Licence (http://www.nationalarchives.gov.uk/doc/open-government-licence/), Note that this data is available to view or download on SNH website see: www.snh.gov.uk/publications-data-and-research/snhi-information-service</gco:CharacterString>
+					</otherConstraints>
+				</MD_LegalConstraints>
+			</resourceConstraints>
+			<spatialRepresentationType>
+				<MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector" codeSpace="ISOTC211/19115">vector</MD_SpatialRepresentationTypeCode>
+			</spatialRepresentationType>
+			<spatialResolution>
+				<MD_Resolution>
+					<distance>
+						<gco:Distance uom="m">5</gco:Distance>
+					</distance>
+				</MD_Resolution>
+			</spatialResolution>
+			<language>
+				<LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="eng" codeSpace="ISO639-2">eng</LanguageCode>
+			</language>
+			<characterSet>
+				<MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+			</characterSet>
+			<topicCategory>
+				<MD_TopicCategoryCode>environment</MD_TopicCategoryCode>
+			</topicCategory>
+			<environmentDescription>
+				<gco:CharacterString>Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; ESRI ArcGIS 10.0.5.4400</gco:CharacterString>
+			</environmentDescription>
+			<extent>
+				<EX_Extent>
+					<geographicElement>
+						<EX_GeographicBoundingBox>
+							<westBoundLongitude>
+								<gco:Decimal>-9.32202825</gco:Decimal>
+							</westBoundLongitude>
+							<eastBoundLongitude>
+								<gco:Decimal>-0.093512624999999</gco:Decimal>
+							</eastBoundLongitude>
+							<southBoundLatitude>
+								<gco:Decimal>54.422093</gco:Decimal>
+							</southBoundLatitude>
+							<northBoundLatitude>
+								<gco:Decimal>61.8049055</gco:Decimal>
+							</northBoundLatitude>
+						</EX_GeographicBoundingBox>
+					</geographicElement>
+					<geographicElement>
+						<EX_GeographicDescription>
+							<extentTypeCode>
+								<gco:Boolean>false</gco:Boolean>
+							</extentTypeCode>
+							<geographicIdentifier>
+								<MD_Identifier>
+									<authority>
+										<CI_Citation>
+											<title>
+												<gco:CharacterString>ISO 3166</gco:CharacterString>
+											</title>
+											<date>
+												<CI_Date>
+													<date>
+														<gco:Date>1999-03-16</gco:Date>
+													</date>
+													<dateType>
+														<CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" codeSpace="ISOTC211/19115">publication</CI_DateTypeCode>
+													</dateType>
+												</CI_Date>
+											</date>
+										</CI_Citation>
+									</authority>
+									<code>
+										<gco:CharacterString>GB-SCT</gco:CharacterString>
+									</code>
+								</MD_Identifier>
+							</geographicIdentifier>
+						</EX_GeographicDescription>
+					</geographicElement>
+				</EX_Extent>
+			</extent>
+			<extent>
+				<EX_Extent>
+					<geographicElement>
+						<EX_GeographicBoundingBox>
+							<extentTypeCode>
+								<gco:Boolean>true</gco:Boolean>
+							</extentTypeCode>
+							<westBoundLongitude>
+								<gco:Decimal>-28.171997</gco:Decimal>
+							</westBoundLongitude>
+							<eastBoundLongitude>
+								<gco:Decimal>15.227695</gco:Decimal>
+							</eastBoundLongitude>
+							<southBoundLatitude>
+								<gco:Decimal>45.501382</gco:Decimal>
+							</southBoundLatitude>
+							<northBoundLatitude>
+								<gco:Decimal>65.171944</gco:Decimal>
+							</northBoundLatitude>
+						</EX_GeographicBoundingBox>
+					</geographicElement>
+				</EX_Extent>
+			</extent>
+		</MD_DataIdentification>
+	</identificationInfo>
+	<distributionInfo>
+		<MD_Distribution>
+			<distributionFormat>
+				<MD_Format>
+					<name>
+						<gco:CharacterString>SDE Feature Class</gco:CharacterString>
+					</name>
+					<version gco:nilReason="missing"/>
+				</MD_Format>
+			</distributionFormat>
+			<distributor>
+				<MD_Distributor>
+					<distributorContact>
+						<CI_ResponsibleParty>
+							<individualName>
+								<gco:CharacterString>Gabor Barton</gco:CharacterString>
+							</individualName>
+							<organisationName>
+								<gco:CharacterString>Scottish Natural Heritage</gco:CharacterString>
+							</organisationName>
+							<positionName>
+								<gco:CharacterString>Geographic Systems &amp; Data Officer</gco:CharacterString>
+							</positionName>
+							<contactInfo>
+								<CI_Contact>
+									<phone>
+										<CI_Telephone>
+											<voice>
+												<gco:CharacterString>01463 725000</gco:CharacterString>
+											</voice>
+											<facsimile>
+												<gco:CharacterString>01463 725067</gco:CharacterString>
+											</facsimile>
+										</CI_Telephone>
+									</phone>
+									<address>
+										<CI_Address>
+											<deliveryPoint>
+												<gco:CharacterString>Great Glen house</gco:CharacterString>
+											</deliveryPoint>
+											<deliveryPoint>
+												<gco:CharacterString>Leachkin Road</gco:CharacterString>
+											</deliveryPoint>
+											<city>
+												<gco:CharacterString>Inverness</gco:CharacterString>
+											</city>
+											<postalCode>
+												<gco:CharacterString>IV3 8NW</gco:CharacterString>
+											</postalCode>
+											<country>
+												<gco:CharacterString>GB</gco:CharacterString>
+											</country>
+											<electronicMailAddress>
+												<gco:CharacterString>Data_Supply@snh.gov.uk</gco:CharacterString>
+											</electronicMailAddress>
+										</CI_Address>
+									</address>
+								</CI_Contact>
+							</contactInfo>
+							<role>
+								<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="distributor" codeSpace="ISOTC211/19115">distributor</CI_RoleCode>
+							</role>
+						</CI_ResponsibleParty>
+					</distributorContact>
+					<distributorFormat>
+						<MD_Format>
+							<name>
+								<gco:CharacterString>SDE Feature Class</gco:CharacterString>
+							</name>
+							<version gco:nilReason="missing"/>
+						</MD_Format>
+					</distributorFormat>
+					<distributorTransferOptions>
+						<MD_DigitalTransferOptions>
+							<onLine>
+								<CI_OnlineResource>
+									<linkage>
+										<URL>http://www.snh.org.uk/snhi</URL>
+									</linkage>
+								</CI_OnlineResource>
+							</onLine>
+						</MD_DigitalTransferOptions>
+					</distributorTransferOptions>
+				</MD_Distributor>
+			</distributor>
+			<transferOptions>
+				<MD_DigitalTransferOptions/>
+			</transferOptions>
+		</MD_Distribution>
+	</distributionInfo>
+	<dataQualityInfo>
+		<DQ_DataQuality>
+			<scope gco:nilReason="missing"/>
+			<lineage>
+				<LI_Lineage>
+					<statement>
+						<gco:CharacterString>SSSIs were first designated under the National Parks and Access to the Countryside Act 1949. The majority of these were later re-notified under the Wildlife and Countryside Act 1981. All 1981 Act SSSI designations are carried forward, and all new SSSI designations are now made, under the Nature Conservation (Scotland) Act 2004.The 2004 Act strengthens the protection of sites and gives legal backing to the increased involvement of land owners and managers and local communities. SNH's SSSI Data has been captured over a long period of time using a range of different source data made available to SNH through the Scottish Central Government SLA, the Pan Government Agreement and subsequently through the One Scotland Mapping Agreement. The data was revised and re-issued in 2012. Please see Access Constraints for more details. SNH also supplies a copy to Registers of Scotland for publication under the Scottish SSSI register. Designating Authority SNH Legislative Context Nature Conservation (Scotland) Act 2004 (section 3). Previously the Wildlife and Countryside Act 1981, Section 28 (as amended) and the National Parks and Access to the Countryside Act 1949, Section 23 (which still applies to a few sites).</gco:CharacterString>
+					</statement>
+				</LI_Lineage>
+			</lineage>
+		</DQ_DataQuality>
+	</dataQualityInfo>
+	<dataIdInfo xmlns=""><envirDesc Sync="TRUE">Microsoft Windows 10 Version 10.0 (Build 19041) ; Esri ArcGIS 12.6.1.24783</envirDesc><dataLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="GBR" Sync="TRUE"></countryCode></dataLang><idCitation><resTitle Sync="TRUE">sssi</resTitle><presForm><PresFormCd value="005" Sync="TRUE"></PresFormCd></presForm></idCitation><spatRpType><SpatRepTypCd value="001" Sync="TRUE"></SpatRepTypCd></spatRpType></dataIdInfo><mdLang xmlns=""><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="GBR" Sync="TRUE"></countryCode></mdLang><Esri xmlns=""><DataProperties><itemProps><itemName Sync="TRUE">sssi</itemName><imsContentType Sync="TRUE">002</imsContentType><itemLocation><linkage Sync="TRUE">file://\\DESKTOP-FLF390U\C$\Users\Raph Martin\Documents\project\data_files\vector\protected_areas\sssi</linkage><protocol Sync="TRUE">Local Area Network</protocol></itemLocation><itemSize Sync="TRUE">0.000</itemSize></itemProps><coordRef><type Sync="TRUE">Projected</type><geogcsn Sync="TRUE">GCS_OSGB_1936</geogcsn><csUnits Sync="TRUE">Linear Unit: Meter (1.000000)</csUnits><projcsn Sync="TRUE">British_National_Grid</projcsn><peXml Sync="TRUE">&lt;ProjectedCoordinateSystem xsi:type='typens:ProjectedCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/2.6.0'&gt;&lt;WKT&gt;PROJCS[&amp;quot;British_National_Grid&amp;quot;,GEOGCS[&amp;quot;GCS_OSGB_1936&amp;quot;,DATUM[&amp;quot;D_OSGB_1936&amp;quot;,SPHEROID[&amp;quot;Airy_1830&amp;quot;,6377563.396,299.3249646]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433]],PROJECTION[&amp;quot;Transverse_Mercator&amp;quot;],PARAMETER[&amp;quot;False_Easting&amp;quot;,400000.0],PARAMETER[&amp;quot;False_Northing&amp;quot;,-100000.0],PARAMETER[&amp;quot;Central_Meridian&amp;quot;,-2.0],PARAMETER[&amp;quot;Scale_Factor&amp;quot;,0.9996012717],PARAMETER[&amp;quot;Latitude_Of_Origin&amp;quot;,49.0],UNIT[&amp;quot;Meter&amp;quot;,1.0],AUTHORITY[&amp;quot;EPSG&amp;quot;,27700]]&lt;/WKT&gt;&lt;XOrigin&gt;-5220400&lt;/XOrigin&gt;&lt;YOrigin&gt;-15524400&lt;/YOrigin&gt;&lt;XYScale&gt;450481592.76709664&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;0.001&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;WKID&gt;27700&lt;/WKID&gt;&lt;LatestWKID&gt;27700&lt;/LatestWKID&gt;&lt;/ProjectedCoordinateSystem&gt;</peXml></coordRef><lineage><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Analysis Tools.tbx\Clip" Date="20210424" Time="142618">Clip SSSI travel_time C:\GIS_Course\programming_Arc_Pro\programming_Arc_Pro.gdb\SSSI_Clip #</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Conversion Tools.tbx\FeatureClassToFeatureClass" Date="20210424" Time="142813">FeatureClassToFeatureClass SSSI_Clip "C:\Users\Raph Martin\Documents\project\data_files\vector" sssi.shp # "NAME "NAME" true true false 255 Text 0 0,First,#,SSSI_Clip,NAME,0,255;PA_CODE "PA_CODE" true true false 4 Long 0 0,First,#,SSSI_Clip,PA_CODE,-1,-1;STATUS "STATUS" true true false 200 Text 0 0,First,#,SSSI_Clip,STATUS,0,200;SITE_HA "SITE_HA" true true false 8 Double 0 0,First,#,SSSI_Clip,SITE_HA,-1,-1;TYPE "TYPE" true true false 45 Text 0 0,First,#,SSSI_Clip,TYPE,0,45;MPA_NET "MPA_NET" true true false 1 Text 0 0,First,#,SSSI_Clip,MPA_NET,0,1;MARINE "MARINE" true true false 1 Text 0 0,First,#,SSSI_Clip,MARINE,0,1;Shape_Leng "Shape_Length" false true true 8 Double 0 0,First,#,SSSI_Clip,Shape_Length,-1,-1;Shape_Area "Shape_Area" false true true 8 Double 0 0,First,#,SSSI_Clip,Shape_Area,-1,-1" #</Process><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Data Management Tools.tbx\Copy" Date="20210424" Time="143203">Copy "C:\Users\Raph Martin\Documents\project\data_files\vector\sssi.shp" "C:\Users\Raph Martin\Documents\project\data_files\vector\protected_areas\sssi.shp" Shapefile #</Process></lineage><copyHistory><copy source="C:\Users\Raph Martin\Documents\project\data_files\vector\sssi" dest="\\DESKTOP-FLF390U\C$\Users\Raph Martin\Documents\project\data_files\vector\protected_areas\sssi" date="20210424" time="14320300"></copy></copyHistory></DataProperties><SyncDate>20210424</SyncDate><SyncTime>14281300</SyncTime><ModDate>20210424</ModDate><ModTime>14281300</ModTime><CreaDate>20210424</CreaDate><CreaTime>14320300</CreaTime><SyncOnce>TRUE</SyncOnce></Esri><distInfo xmlns=""><distFormat><formatName Sync="TRUE">Shapefile</formatName></distFormat><distTranOps><transSize Sync="TRUE">0.000</transSize></distTranOps></distInfo><mdHrLv xmlns=""><ScopeCd value="005" Sync="TRUE"></ScopeCd></mdHrLv><mdHrLvName xmlns="" Sync="TRUE">dataset</mdHrLvName><refSysInfo xmlns=""><RefSystem><refSysID><identCode code="27700" Sync="TRUE"></identCode><idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">8.9.5(3.0.1)</idVersion></refSysID></RefSystem></refSysInfo><spatRepInfo xmlns=""><VectSpatRep><geometObjs Name="sssi"><geoObjTyp><GeoObjTypCd value="002" Sync="TRUE"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">0</geoObjCnt></geometObjs><topLvl><TopoLevCd value="001" Sync="TRUE"></TopoLevCd></topLvl></VectSpatRep></spatRepInfo><spdoinfo xmlns=""><ptvctinf><esriterm Name="sssi"><efeatyp Sync="TRUE">Simple</efeatyp><efeageom code="4" Sync="TRUE"></efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">0</efeacnt><spindex Sync="TRUE">FALSE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm></ptvctinf></spdoinfo><eainfo xmlns=""><detailed Name="sssi"><enttyp><enttypl Sync="TRUE">sssi</enttypl><enttypt Sync="TRUE">Feature Class</enttypt><enttypc Sync="TRUE">0</enttypc></enttyp><attr><attrlabl Sync="TRUE">FID</attrlabl><attalias Sync="TRUE">FID</attalias><attrtype Sync="TRUE">OID</attrtype><attwidth Sync="TRUE">4</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Internal feature number.</attrdef><attrdefs Sync="TRUE">Esri</attrdefs><attrdomv><udom Sync="TRUE">Sequential unique whole numbers that are automatically generated.</udom></attrdomv></attr><attr><attrlabl Sync="TRUE">Shape</attrlabl><attalias Sync="TRUE">Shape</attalias><attrtype Sync="TRUE">Geometry</attrtype><attwidth Sync="TRUE">0</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Feature geometry.</attrdef><attrdefs Sync="TRUE">Esri</attrdefs><attrdomv><udom Sync="TRUE">Coordinates defining the features.</udom></attrdomv></attr><attr><attrlabl Sync="TRUE">NAME</attrlabl><attalias Sync="TRUE">NAME</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">254</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">PA_CODE</attrlabl><attalias Sync="TRUE">PA_CODE</attalias><attrtype Sync="TRUE">Integer</attrtype><attwidth Sync="TRUE">10</attwidth><atprecis Sync="TRUE">10</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">STATUS</attrlabl><attalias Sync="TRUE">STATUS</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">200</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">SITE_HA</attrlabl><attalias Sync="TRUE">SITE_HA</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">TYPE</attrlabl><attalias Sync="TRUE">TYPE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">45</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">MPA_NET</attrlabl><attalias Sync="TRUE">MPA_NET</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">1</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">MARINE</attrlabl><attalias Sync="TRUE">MARINE</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">1</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">Shape_Leng</attrlabl><attalias Sync="TRUE">Shape_Leng</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale></attr><attr><attrlabl Sync="TRUE">Shape_Area</attrlabl><attalias Sync="TRUE">Shape_Area</attalias><attrtype Sync="TRUE">Double</attrtype><attwidth Sync="TRUE">19</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Area of feature in internal units squared.</attrdef><attrdefs Sync="TRUE">Esri</attrdefs><attrdomv><udom Sync="TRUE">Positive real numbers that are automatically generated.</udom></attrdomv></attr></detailed></eainfo><mdDateSt xmlns="" Sync="TRUE">20210424</mdDateSt></MD_Metadata>
