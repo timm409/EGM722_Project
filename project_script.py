@@ -10,17 +10,15 @@ from osgeo import osr
 from shapely.geometry import Point, shape, mapping
 from fiona.crs import from_epsg
 import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 from cartopy.feature import ShapelyFeature
 import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 
-
 """
-This code is for finding suitable land for biomass planting
-functions: line 18 - 140
-analysis: line 144 - 231
-mapping: line 234 - 
+Selection Tool for Identifying Areas of Biomass Production
+functions: line 25 - 223
+analysis: line 224 - 339
+mapping: line 340 - 395
 """
 
 
@@ -41,13 +39,10 @@ def create_slp_asp(dem_in, slp_out, asp_out):
     :param slp_out: slope raster output path
     :param asp_out: aspect raster output path
     """
-    # Open the DEM
+    # Open the DEM, create slope raster, aspect raster, close the DEM
     gdal.Open(dem_in)
-    # Create slope raster
     gdal.DEMProcessing(slp_out, dem_in, "slope", computeEdges=True)
-    # Create aspect raster
     gdal.DEMProcessing(asp_out, dem_in, "aspect", computeEdges=True)
-    # Close the DEM
     dem_in = None
 
 
@@ -57,13 +52,10 @@ def readraster(filename):
     :param filename: path for input raster
     :return: transformation, projection and z values
     """
-    # Open the raster
+    # Open the raster, get raster band 1, get transformation, get projection
     filehandle = gdal.Open(filename)
-    # Get raster band 1
     band1 = filehandle.GetRasterBand(1)
-    # Get transformation
     geotransform = filehandle.GetGeoTransform()
-    # Get projection
     geoproj = filehandle.GetProjection()
     # Read raster band 1 as array and define as z
     z = band1.ReadAsArray()
@@ -78,21 +70,16 @@ def writeraster(filename, geotransform, geoprojection, data):
     :param geoprojection: projection of new data
     :param data: data input values
     """
-    # Create grid
+    # Create grid, get GeoTiff driver, set data type to 32 bit float
     (x, y) = data.shape
-    # Get GeoTiff driver
     driver = gdal.GetDriverByName('GTiff')
-    # Set data type to 32 bit float
     dst_datatype = gdal.GDT_Float32
-    # Create raster file
+    # Create raster file, get raster band 1 and write as array
     dst_ds = driver.Create(filename, y, x, 1, dst_datatype)
-    # Get raster band 1 and write as array
     dst_ds.GetRasterBand(1).WriteArray(data)
-    # Set transformation
+    # Set transformation, set projection and set no data values to -9999
     dst_ds.SetGeoTransform(geotransform)
-    # Set projection
     dst_ds.SetProjection(geoprojection)
-    # Set no data values to -9999
     dst_ds.GetRasterBand(1).SetNoDataValue(-9999)
 
 
@@ -102,23 +89,17 @@ def polygon_raster(raster, polygon_shp):
     :param raster: input raster path
     :param polygon_shp: output shapefile path
     """
-    # Open raster file
+    # Open raster file, get raster band 1, get spatial reference and projection
     src_ds = gdal.Open(raster)
-    # Get raster band 1
     srcband = src_ds.GetRasterBand(1)
-    # Get the spatial reference
     srs = osr.SpatialReference()
-    # Get spatial projection
     srs.ImportFromWkt(src_ds.GetProjection())
-    # Define output datasource
+    # Define output datasource, get driver and create a shapefile for datasource
     dst_layername = polygon_shp
-    # Get driver for ESRI shapefile
     drv = ogr.GetDriverByName("ESRI Shapefile")
-    # Create a shapefile for datasource
     dst_ds = drv.CreateDataSource(dst_layername + ".shp")
-    # Create a layer and set srs
+    # Create a layer, set srs, polygonize the data and save to file
     dst_layer = dst_ds.CreateLayer(dst_layername, srs=srs)
-    # Polygonize the data and save to file
     gdal.Polygonize(srcband, srcband, dst_layer, -1, [], callback=None)
 
 
@@ -141,27 +122,6 @@ def unite_shp(shp_df, crs1):
     # Union the objects
     shp_u = shp_df.unary_union
     return gpd.GeoDataFrame(crs=crs1, geometry=[shp_u])
-
-
-def multi2single(gpdf):
-    """
-    multipart to singlepart
-    :param gpdf: polygon gpd GeoDataFrame path
-    :return: exploded polygon
-    """
-    # Input is polygon
-    gpdf_singlepoly = gpdf[gpdf.geometry.type == 'Polygon']
-    # Output is multi polygon
-    gpdf_multipoly = gpdf[gpdf.geometry.type == 'MultiPolygon']
-
-    for i, row in gpdf_multipoly.iterrows():
-        series_geometries = pd.Series(row.geometry)
-        df = pd.concat([gpd.GeoDataFrame(row, crs=gpdf_multipoly.crs).T]*len(series_geometries), ignore_index=True)
-        df['geometry'] = series_geometries
-        gpdf_singlepoly = pd.concat([gpdf_singlepoly, df])
-
-    gpdf_singlepoly.reset_index(inplace=True, drop=True)
-    return gpdf_singlepoly
 
 
 def erase_shp(big_shp, small_shp, path_out, crs1):
@@ -216,44 +176,60 @@ def c_point(coordinates, location, epsg, output):
     return newdata.to_file(output)
 
 
-# generate matplotlib handles to create a legend of the features we put in our map.
 def generate_handles(labels, colors, edge='k', alpha=1):
-    lc = len(colors)  # get the length of the color list
+    """
+    Generate handles for the legend map
+    :param labels: name of legend entry
+    :param colors: color of legend box
+    :param edge: edge colour, default is black
+    :param alpha: transparency of legend, default is not transparent
+    :return: handles
+    """
+    # Get the length of the colour list
+    lc = len(colors)
     handles = []
+    # Create a rectangle for each of the legend entries
     for i in range(len(labels)):
-        handles.append(mpatches.Circle((0.5, 0.5), 0.25, facecolor=colors[i % lc], edgecolor=edge, alpha=alpha))
+        handles.append(mpatches.Rectangle((0, 0), 1, 1, facecolor=colors[i % lc], edgecolor=edge, alpha=alpha))
     return handles
 
 
 def scale_bar(ax, location=(0.92, 0.9)):
+    """
+    Creates a scale bar
+    :param ax: axes to draw the scale bar
+    :param location: the location of the legend on the map
+    """
+    # Get the limits of the axes in lat long
     llx0, llx1, lly0, lly1 = ax.get_extent(ccrs.PlateCarree())
+    # Project in meters
     sbllx = (llx1 + llx0) / 2
     sblly = lly0 + (lly1 - lly0) * location[1]
-
     tmc = ccrs.TransverseMercator(sbllx, sblly)
+    # Get the extent of the plotted area in coordinates in metres
     x0, x1, y0, y1 = ax.get_extent(tmc)
+    # Turn the specified scale bar location into metres
     sbx = x0 + (x1 - x0) * location[0]
     sby = y0 + (y1 - y0) * location[1]
-
+    # Plot the color bar
     plt.plot([sbx, sbx - 10000], [sby, sby], color='k', linewidth=6, transform=tmc)
     plt.plot([sbx, sbx - 5000], [sby, sby], color='k', linewidth=3, transform=tmc)
     plt.plot([sbx-5000, sbx - 10000], [sby, sby], color='w', linewidth=3, transform=tmc)
-
+    # Plot the text
     plt.text(sbx, sby-2000, '10 km', transform=tmc, fontsize=8)
     plt.text(sbx-5000, sby-2000, '5 km', transform=tmc, fontsize=8)
     plt.text(sbx-10500, sby-2000, '0 km', transform=tmc, fontsize=8)
 
-"""
 
-#-----------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------
 
 # Define DEM, travel area shapefile and output for clipped DEM
 dem = "data_files/raster/dem_25m.tif"
-travel_time = "data_files/vector/travel_time.shp"
+study_area = "data_files/vector/travel_time.shp"
 dem_clip = "data_files/raster/dem_clip.tif"
 
-# Clip DEM to travel time shapefile
-raster_shp_clip(dem, travel_time, dem_clip)
+# Clip DEM to study area shapefile
+raster_shp_clip(dem, study_area, dem_clip)
 
 # Define slope and aspect output paths
 slope = "data_files/raster/slope.tif"
@@ -296,84 +272,55 @@ polygon_raster(aspect_reclass_nw, aspect_vec_nw)
 polygon_raster(aspect_reclass_ne, aspect_vec_ne)
 polygon_raster(slope_reclass, slope_vec)
 
-# Open the converted shapefiles 
-aspect_vec_nw = gpd.read_file('data_files/vector/aspect_vec_nw.shp')
-aspect_vec_ne = gpd.read_file('data_files/vector/aspect_vec_ne.shp')
-slope_vec = gpd.read_file('data_files/vector/slope_vec.shp')
-
-# Merge the shapefiles and dissolve into one shapefile
-steep_north = [aspect_vec_nw, aspect_vec_ne, slope_vec]
-steep_north_merged = merge_shp(steep_north)
-steep_north_dissolved = "data_files/vector/steep_north_dissolved.shp"
-unite_shp(steep_north_merged, "EPSG:27700", steep_north_dissolved)
-
-# Output path of erase
-poly_clip1 = 'data_files/vector/poly_clip1.shp'
-
-# Erase steep and north facing areas
-erase_shp(travel_time, steep_north_dissolved, poly_clip1, "EPSG:27700")
-
-# Open the shapefiles for infrastructure
+# Open the shapefiles for land constraints
 roads = gpd.read_file('data_files/vector/infrastructure/roads.shp')
 rivers = gpd.read_file('data_files/vector/infrastructure/rivers.shp')
 buildings = gpd.read_file('data_files/vector/infrastructure/buildings.shp')
 
-# Define infra as the infrastructure list
-infra = [roads, rivers, buildings]
+# Define land constraints as a list
+l_con = [roads, rivers, buildings]
 
-# Merge the infrastructure shapefiles and define
-inf_merge = merge_shp(infra)
+# Merge the land constraint shapefiles and define
+l_con_merge = merge_shp(l_con)
 
-# 25m buffer of infrastructure
-inf_buf = inf_merge.geometry.buffer(24)
+# 24m buffer of land constraints and save to file
+l_con_buf = l_con_merge.geometry.buffer(24)
+l_con_buf.to_file('data_files/vector/l_con_buf.shp')
 
-# Dissolve infrastructure buffer and save to file
-inf_buf_dissolved = unite_shp(inf_buf, inf_buf.crs)
-inf_buf_dissolved.to_file('data_files/vector/inf_buf_dissolved.shp')
-
-# Outputs for infrastructure erase function
-poly_clip2 = 'data_files/vector/poly_clip2.shp'
-
-# Path of dissolved infrastructure buffer
-inf_buf_dissolved = 'data_files/vector/inf_buf_dissolved.shp'
-
-# Erase the infrastructure from the polygon
-erase_shp(poly_clip1, inf_buf_dissolved, poly_clip2, "EPSG:27700")
-
-# Open the shapefiles for protected areas
+# Open the polygons for removing from the study area polygon
+aspect_vec_nw = gpd.read_file('data_files/vector/aspect_vec_nw.shp')
+aspect_vec_ne = gpd.read_file('data_files/vector/aspect_vec_ne.shp')
+slope_vec = gpd.read_file('data_files/vector/slope_vec.shp')
+l_con = gpd.read_file('data_files/vector/l_con_buf.shp')
 ramsar = gpd.read_file('data_files/vector/protected_areas/ramsar.shp')
 sssi = gpd.read_file('data_files/vector/protected_areas/sssi.shp')
 
-# Define protected areas as a list
-p_areas = [ramsar, sssi]
+# Define the polygons as a list
+erase_mask_polygons = [aspect_vec_nw, aspect_vec_ne, slope_vec, l_con, ramsar, sssi]
 
-# Merge the protected areas shapefiles and define
-p_areas_merge = merge_shp(p_areas)
+# Merge the polygons, dissolve and save to file
+erase_mask = merge_shp(erase_mask_polygons)
+erase_mask_dissolved = unite_shp(erase_mask, erase_mask.crs)
+erase_mask_dissolved.to_file('data_files/vector/erase_mask.shp')
 
-# Dissolve protected areas and save to file
-p_areas_dissolved = unite_shp(p_areas_merge, p_areas_merge.crs)
-p_areas_dissolved.to_file('data_files/vector/p_areas_dissolved.shp')
+# Input file and output path for the erase function
+erase_mask = 'data_files/vector/erase_mask.shp'
+poly_clip = 'data_files/vector/poly_clip.shp'
 
-# Output after erasing protected areas 
-poly_clip3 = 'data_files/vector/poly_clip3.shp'
-
-# Path of dissolved protected areas 
-p_areas_dissolved = 'data_files/vector/p_areas_dissolved.shp'
-
-# Erase the protected areas from the polygon
-erase_shp(poly_clip2, p_areas_dissolved, poly_clip3, "EPSG:27700")
+# Erase the areas identified as unsuitable from the polygon
+erase_shp(study_area, erase_mask, poly_clip, "EPSG:27700")
 
 # Read multipart polygon output
-poly_clip3 = gpd.read_file("data_files/vector/poly_clip3.shp")
+poly_clip = gpd.read_file("data_files/vector/poly_clip.shp")
 
 # Explode the shapefile from multipart to singlepart and write to file
-multi2single(poly_clip3).to_file('data_files/vector/poly_clip_explode.shp', driver='ESRI Shapefile')
+poly_clip.geometry.explode().to_file('data_files/vector/poly_clip_explode.shp', driver='ESRI Shapefile')
 
 # Read singlepart polygon output
 explode = gpd.read_file("data_files/vector/poly_clip_explode.shp")
 
 # Add column named area and calculate geometry
-explode["area_km2"] = explode['geometry'].area / 10**6
+explode["area_km2"] = explode['geometry'].area / 10 ** 6
 
 # Write to a new file
 explode.to_file('data_files/vector/data_w_area.shp')
@@ -386,13 +333,11 @@ final_areas[final_areas['area_km2'] > 1].to_file('data_files/vector/final_select
 
 # Read the final areas file
 final_selection = gpd.read_file('data_files/vector/final_selection.shp')
- 
+
 # Print result of analysis
 print("The total suitable area found is {}km2".format(round(final_selection['area_km2'].sum(), 2)))
 
-#-----------------------------------------------------------------------------------------------------------------------
-
-"""
+# -----------------------------------------------------------------------------------------------------------------------
 
 # Create point for Stevens Croft power station and write to file
 c_point((312130.15, 585253.25), 'Stevens Croft', 27700, "data_files/vector/pwr_stn.shp")
@@ -426,10 +371,6 @@ ax.plot(pwr_station.geometry.x, pwr_station.geometry.y, 'o', color='r', ms=8, la
 xmin, ymin, xmax, ymax = study_tm.total_bounds
 ax.set_extent([xmin, xmax, ymin, ymax], crs=mycrs)
 
-# Colours and labels for legend
-colours = ['g', 'r', 'k']
-text = ["Suitable Land", "Power Station"]
-
 # Generate handle for legend
 area_handle = generate_handles('Suitable Land', ['g'])
 
@@ -451,4 +392,4 @@ ax.text(pwr_station.geometry.x, pwr_station.geometry.y-1750, 'Power Station', ba
         ha='center', c='r', fontsize=6)
 
 # Save the figure
-fig.savefig('final_map.jpg', dpi=500, bbox_inches='tight')
+fig.savefig('final_map3.jpg', dpi=500, bbox_inches='tight')
