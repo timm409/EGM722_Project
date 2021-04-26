@@ -10,6 +10,7 @@ from osgeo import osr
 from shapely.geometry import Point, shape, mapping
 from fiona.crs import from_epsg
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as pe
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from cartopy.feature import ShapelyFeature
 import cartopy.crs as ccrs
@@ -447,8 +448,9 @@ ax.annotate('N', xy=(x, y), xytext=(x, y-arrow_length),
             xycoords=ax.transAxes)
 
 # Add a label for the power station
-ax.text(pwr_station.geometry.x, pwr_station.geometry.y-1750, 'Power Station', backgroundcolor='w',
-        ha='center', c='r', fontsize=6)
+ax.text(pwr_station.geometry.x, pwr_station.geometry.y+1000, 'Power Station',
+        size=8, color='k', ha='center', fontweight='bold',
+        path_effects=[pe.withStroke(linewidth=2, foreground="white")])
 
 # Save the figure
 fig.savefig('final_map.jpg', dpi=500, bbox_inches='tight')
