@@ -17,9 +17,9 @@ import matplotlib.patches as mpatches
 
 """
 Selection Tool for Identifying Areas of Biomass Production
-functions: line 26 - 224
-analysis: line 225 - 340
-mapping: line 341 - 398
+functions: line 26 - 230
+analysis: line 231 - 330
+mapping: line 331 - 387
 """
 
 
@@ -50,6 +50,8 @@ def create_slp_asp(dem_in, slp_out, asp_out):
 def readraster(filename):
     """
     Read raster and extract transformation, projection and z values
+    Adapted this question: https://gis.stackexchange.com/q/163685
+    Answered by SE user RutgerH: https://gis.stackexchange.com/a/163705
     :param filename: path for input raster
     :return: transformation, projection and z values
     """
@@ -87,6 +89,7 @@ def writeraster(filename, geotransform, geoprojection, data):
 def polygon_raster(raster, polygon_shp):
     """
     Converts raster file to a polygon shapefile
+    Adapted this question by SE user nmtoken: https://gis.stackexchange.com/q/254410
     :param raster: input raster path
     :param polygon_shp: output shapefile path
     """
@@ -128,6 +131,7 @@ def unite_shp(shp_df, crs1):
 def erase_shp(big_shp, small_shp, path_out, crs1):
     """
     Erase part of a shapefile using another shapefile and write to output
+    Adapted this question by SE user PolyGeo: https://gis.stackexchange.com/q/163040
     :param big_shp: input path of shapefile
     :param small_shp: input path of template shapefile
     :param path_out: output path of shapefile
@@ -154,7 +158,7 @@ def erase_shp(big_shp, small_shp, path_out, crs1):
 
 def c_point(coordinates, location, epsg, output):
     """
-    Create point
+    Create point shapefile
     :param coordinates: coordinates of the point (units must be same as epsg)
     :param location: string name of the point
     :param epsg: coordinate system
@@ -197,7 +201,9 @@ def generate_handles(labels, colors, edge='k', alpha=1):
 
 def scale_bar(ax, location=(0.92, 0.9)):
     """
-    Creates a scale bar
+    Creates a scale bar of length 10km in the upper right corner of the map.
+    Adapted this question:https://stackoverflow.com/q/32333870
+    Answered by SO user Siyh: https://stackoverflow.com/a/35705477
     :param ax: axes to draw the scale bar
     :param location: the location of the legend on the map
     """
@@ -232,31 +238,29 @@ dem_clip = "data_files/raster/dem_clip.tif"
 # Clip DEM to study area shapefile
 raster_shp_clip(dem, study_area, dem_clip)
 
-# Define slope and aspect output paths
+# Create slope and aspect raster files from clipped DEM
 slope = "data_files/raster/slope.tif"
 aspect = "data_files/raster/aspect.tif"
-
-# Create slope and aspect raster files from clipped DEM
 create_slp_asp(dem_clip, slope, aspect)
 
-# Reclass slope and aspect to high slope and north facing
+# Reclassify slope and aspect to high slope and north facing
 high_slope = "data_files/raster/high_slope.tif"
 nw_facing = "data_files/raster/nw_facing.tif"
 ne_facing = "data_files/raster/ne_facing.tif"
 
-# Reclass values below or equal to 11.3 to nodata
+# Reclassify values below or equal to 11.3 to nodata
 [geotransform, geoproj, z] = readraster(slope)
 z[z <= 11.3] = np.nan
 z[z > 11.3] = 1
 writeraster(high_slope, geotransform, geoproj, z)
 
-# Reclass values above or equal to 315 to nodata
+# Reclassify values above or equal to 315 to nodata
 [geotransform, geoproj, z] = readraster(aspect)
 z[z <= 315] = np.nan
 z[z > 315] = 1
 writeraster(nw_facing, geotransform, geoproj, z)
 
-# Reclass values below or equal to 45 to nodata
+# Reclassify values below or equal to 45 to nodata
 [geotransform, geoproj, z] = readraster(aspect)
 z[z >= 45] = np.nan
 z[z < 0] = np.nan
@@ -268,7 +272,7 @@ slope_vec = "data_files/vector/slope_vec"
 nw_facing_vec = "data_files/vector/nw_facing_vec"
 ne_facing_vec = "data_files/vector/ne_facing_vec"
 
-# Convert the rasters to shapefiles
+# Convert the raster data to shapefiles
 polygon_raster(high_slope, slope_vec)
 polygon_raster(nw_facing, nw_facing_vec)
 polygon_raster(ne_facing, ne_facing_vec)
@@ -277,8 +281,6 @@ polygon_raster(ne_facing, ne_facing_vec)
 roads = gpd.read_file('data_files/vector/infrastructure/roads.shp')
 rivers = gpd.read_file('data_files/vector/infrastructure/rivers.shp')
 buildings = gpd.read_file('data_files/vector/infrastructure/buildings.shp')
-
-# Define land constraints as a list
 l_con = [roads, rivers, buildings]
 
 # Merge the land constraint shapefiles and define
@@ -295,8 +297,6 @@ slope_vec = gpd.read_file('data_files/vector/slope_vec.shp')
 l_con = gpd.read_file('data_files/vector/l_con_buf.shp')
 ramsar = gpd.read_file('data_files/vector/protected_areas/ramsar.shp')
 sssi = gpd.read_file('data_files/vector/protected_areas/sssi.shp')
-
-# Define the polygons as a list
 erase_mask_polygons = [nw_facing_vec, ne_facing_vec, slope_vec, l_con, ramsar, sssi]
 
 # Merge the polygons, dissolve and save to file
@@ -311,31 +311,21 @@ new_land = 'data_files/vector/new_land.shp'
 # Erase the areas identified as unsuitable from the polygon
 erase_shp(study_area, erase_mask, new_land, "EPSG:27700")
 
-# Read multipart polygon output
-new_land = gpd.read_file("data_files/vector/new_land.shp")
-
 # Explode the shapefile from multipart to singlepart and write to file
+new_land = gpd.read_file("data_files/vector/new_land.shp")
 new_land.geometry.explode().to_file('data_files/vector/new_land_explode.shp', driver='ESRI Shapefile')
 
-# Read singlepart polygon output
+# Add column named area, calculate geometry and write to new file
 explode = gpd.read_file("data_files/vector/new_land_explode.shp")
-
-# Add column named area and calculate geometry
 explode["area_km2"] = explode['geometry'].area / 10 ** 6
-
-# Write to a new file
 explode.to_file('data_files/vector/land_w_area.shp')
 
-# Read file with area
-land_w_area = gpd.read_file('data_files/vector/land_w_area.shp')
-
 # Select areas greater than 1km2 and write to a new file
+land_w_area = gpd.read_file('data_files/vector/land_w_area.shp')
 land_w_area[land_w_area['area_km2'] > 1].to_file('data_files/vector/final_selection.shp')
 
-# Read the final areas file
-final_selection = gpd.read_file('data_files/vector/final_selection.shp')
-
 # Print result of analysis
+final_selection = gpd.read_file('data_files/vector/final_selection.shp')
 print("The total suitable area found is {}km2".format(round(final_selection['area_km2'].sum(), 2)))
 
 # -----------------------------------------------------------------------------------------------------------------------
