@@ -137,8 +137,8 @@ def erase_shp(big_shp, small_shp, path_out, crs1):
     big = fiona.open(big_shp)
     small = fiona.open(small_shp)
     # Cycle through the attribute
-    pol_big = big.next()
-    pol_small = small.next()
+    pol_big = next(iter(big))
+    pol_small = next(iter(small))
     # Define variables as shape and difference between geometries
     a = shape(pol_big['geometry'])
     b = shape(pol_small['geometry'])

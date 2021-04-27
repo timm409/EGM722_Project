@@ -14,8 +14,8 @@ def erase_shp(big_shp, small_shp, path_out, crs1):
     big = fiona.open(big_shp)
     small = fiona.open(small_shp)
     # Cycle through the attribute
-    pol_big = big.next()
-    pol_small = small.next()
+    pol_big = next(iter(big))
+    pol_small = next(iter(small))
     # Define variables as shape and difference between geometries
     a = shape(pol_big['geometry'])
     b = shape(pol_small['geometry'])
@@ -29,8 +29,8 @@ def erase_shp(big_shp, small_shp, path_out, crs1):
         })
 
 
-poly_clip1 = 'C:/Users/Raph Martin/Documents/project/data_files/vector/poly_clip1.shp'
-inf_buf2 = 'C:/Users/Raph Martin/Documents/project/data_files/vector/inf_buf2.shp'
-poly_clip2 = 'C:/Users/Raph Martin/Documents/project/data_files/vector/poly_clip2.shp'
+study_area = 'C:/Users/Raph Martin/Documents/project/data_files/vector/travel_time.shp'
+erase_mask = 'C:/Users/Raph Martin/Documents/project/data_files/vector/erase_mask.shp'
+new_land = 'C:/Users/Raph Martin/Documents/project/data_files/vector/new_land.shp'
 
-erase_shp(poly_clip1, inf_buf2, poly_clip2, "EPSG:27700")
+erase_shp(study_area, erase_mask, new_land, "EPSG:27700")
