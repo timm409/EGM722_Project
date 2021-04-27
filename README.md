@@ -23,7 +23,7 @@ the following ways:
 The data files provided have been pre-processed to reduce file size. The data was collated from a variety of sources:
 
 1. DEM - [Earth Explorer](https://earthexplorer.usgs.gov/).
-2. Travel Time - Created in ArcGIS Project.
+2. Travel Time - Created in ArcGIS Pro.
 3. Buildings, rivers and roads - [Ordnance Survey](https://osdatahub.os.uk/downloads/open).
 4. Protected Areas - [Scottish Natural Heritage](https://gateway.snh.gov.uk/natural-spaces/).
 
