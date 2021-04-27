@@ -11,16 +11,15 @@ from shapely.geometry import Point, shape, mapping
 from fiona.crs import from_epsg
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as pe
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 from cartopy.feature import ShapelyFeature
 import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 
 """
 Selection Tool for Identifying Areas of Biomass Production
-functions: line 25 - 223
-analysis: line 224 - 339
-mapping: line 340 - 395
+functions: line 26 - 224
+analysis: line 225 - 340
+mapping: line 341 - 398
 """
 
 
@@ -241,38 +240,38 @@ aspect = "data_files/raster/aspect.tif"
 create_slp_asp(dem_clip, slope, aspect)
 
 # Reclass slope and aspect to high slope and north facing
-slope_reclass = "data_files/raster/slope_reclass.tif"
-aspect_reclass_nw = "data_files/raster/aspect_reclass_nw.tif"
-aspect_reclass_ne = "data_files/raster/aspect_reclass_ne.tif"
+high_slope = "data_files/raster/high_slope.tif"
+nw_facing = "data_files/raster/nw_facing.tif"
+ne_facing = "data_files/raster/ne_facing.tif"
 
 # Reclass values below or equal to 11.3 to nodata
 [geotransform, geoproj, z] = readraster(slope)
 z[z <= 11.3] = np.nan
 z[z > 11.3] = 1
-writeraster(slope_reclass, geotransform, geoproj, z)
+writeraster(high_slope, geotransform, geoproj, z)
 
 # Reclass values above or equal to 315 to nodata
 [geotransform, geoproj, z] = readraster(aspect)
 z[z <= 315] = np.nan
 z[z > 315] = 1
-writeraster(aspect_reclass_nw, geotransform, geoproj, z)
+writeraster(nw_facing, geotransform, geoproj, z)
 
 # Reclass values below or equal to 45 to nodata
 [geotransform, geoproj, z] = readraster(aspect)
 z[z >= 45] = np.nan
 z[z < 0] = np.nan
 z[z < 45] = 1
-writeraster(aspect_reclass_ne, geotransform, geoproj, z)
+writeraster(ne_facing, geotransform, geoproj, z)
 
 # Define the output path for the new shapefiles
-aspect_vec_nw = "data_files/vector/aspect_vec_nw"
 slope_vec = "data_files/vector/slope_vec"
-aspect_vec_ne = "data_files/vector/aspect_vec_ne"
+nw_facing_vec = "data_files/vector/nw_facing_vec"
+ne_facing_vec = "data_files/vector/ne_facing_vec"
 
 # Convert the rasters to shapefiles
-polygon_raster(aspect_reclass_nw, aspect_vec_nw)
-polygon_raster(aspect_reclass_ne, aspect_vec_ne)
-polygon_raster(slope_reclass, slope_vec)
+polygon_raster(high_slope, slope_vec)
+polygon_raster(nw_facing, nw_facing_vec)
+polygon_raster(ne_facing, ne_facing_vec)
 
 # Open the shapefiles for land constraints
 roads = gpd.read_file('data_files/vector/infrastructure/roads.shp')
@@ -290,15 +289,15 @@ l_con_buf = l_con_merge.geometry.buffer(24)
 l_con_buf.to_file('data_files/vector/l_con_buf.shp')
 
 # Open the polygons for removing from the study area polygon
-aspect_vec_nw = gpd.read_file('data_files/vector/aspect_vec_nw.shp')
-aspect_vec_ne = gpd.read_file('data_files/vector/aspect_vec_ne.shp')
+nw_facing_vec = gpd.read_file('data_files/vector/nw_facing_vec.shp')
+ne_facing_vec = gpd.read_file('data_files/vector/ne_facing_vec.shp')
 slope_vec = gpd.read_file('data_files/vector/slope_vec.shp')
 l_con = gpd.read_file('data_files/vector/l_con_buf.shp')
 ramsar = gpd.read_file('data_files/vector/protected_areas/ramsar.shp')
 sssi = gpd.read_file('data_files/vector/protected_areas/sssi.shp')
 
 # Define the polygons as a list
-erase_mask_polygons = [aspect_vec_nw, aspect_vec_ne, slope_vec, l_con, ramsar, sssi]
+erase_mask_polygons = [nw_facing_vec, ne_facing_vec, slope_vec, l_con, ramsar, sssi]
 
 # Merge the polygons, dissolve and save to file
 erase_mask = merge_shp(erase_mask_polygons)
@@ -307,31 +306,31 @@ erase_mask_dissolved.to_file('data_files/vector/erase_mask.shp')
 
 # Input file and output path for the erase function
 erase_mask = 'data_files/vector/erase_mask.shp'
-poly_clip = 'data_files/vector/poly_clip.shp'
+new_land = 'data_files/vector/new_land.shp'
 
 # Erase the areas identified as unsuitable from the polygon
-erase_shp(study_area, erase_mask, poly_clip, "EPSG:27700")
+erase_shp(study_area, erase_mask, new_land, "EPSG:27700")
 
 # Read multipart polygon output
-poly_clip = gpd.read_file("data_files/vector/poly_clip.shp")
+new_land = gpd.read_file("data_files/vector/new_land.shp")
 
 # Explode the shapefile from multipart to singlepart and write to file
-poly_clip.geometry.explode().to_file('data_files/vector/poly_clip_explode.shp', driver='ESRI Shapefile')
+new_land.geometry.explode().to_file('data_files/vector/new_land_explode.shp', driver='ESRI Shapefile')
 
 # Read singlepart polygon output
-explode = gpd.read_file("data_files/vector/poly_clip_explode.shp")
+explode = gpd.read_file("data_files/vector/new_land_explode.shp")
 
 # Add column named area and calculate geometry
 explode["area_km2"] = explode['geometry'].area / 10 ** 6
 
 # Write to a new file
-explode.to_file('data_files/vector/data_w_area.shp')
+explode.to_file('data_files/vector/land_w_area.shp')
 
 # Read file with area
-final_areas = gpd.read_file('data_files/vector/data_w_area.shp')
+land_w_area = gpd.read_file('data_files/vector/land_w_area.shp')
 
 # Select areas greater than 1km2 and write to a new file
-final_areas[final_areas['area_km2'] > 1].to_file('data_files/vector/final_selection.shp')
+land_w_area[land_w_area['area_km2'] > 1].to_file('data_files/vector/final_selection.shp')
 
 # Read the final areas file
 final_selection = gpd.read_file('data_files/vector/final_selection.shp')
@@ -395,4 +394,4 @@ ax.text(pwr_station.geometry.x, pwr_station.geometry.y+1000, 'Power Station',
         path_effects=[pe.withStroke(linewidth=2, foreground="white")])
 
 # Save the figure
-fig.savefig('final_map3.jpg', dpi=500, bbox_inches='tight')
+fig.savefig('final_map.jpg', dpi=500, bbox_inches='tight')
